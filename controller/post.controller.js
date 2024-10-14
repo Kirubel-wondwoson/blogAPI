@@ -105,7 +105,7 @@ exports.UpdateAPost = async (req, res) => {
   }
 }
 
-exports.deleteAPost = async (req, res) => {
+exports.DeleteAPost = async (req, res) => {
   try {
     const post = await Post.findByIdAndRemove(req.params.postId, {
       authorId: req.user.id,

@@ -1,22 +1,14 @@
-//import mongoose 
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
+const config = require('./key')
+const db = config.MONGODB_URL
 
-//import config file
-const CONFIG = require('./key.js')
-
-//database connection function
-function connectToDB(){
-    mongoose.connect(CONFIG.MONGODB_URL);
-
-    //Add event listener to test connection
-    mongoose.connection.on('connected', () => {
-        console.log('connection to DB successful')
-    })
-    //catch error
-    mongoose.connection.on("error", (err) => {
-        console.log('Connection to DB failed')
-        console.log(err)
-    })
+const connectDB = async() => {
+  try {
+    await mongoose.connect(db)
+    console.log("Succesfully Conneced!!")
+  } catch (error) {
+    console.log("It isn't Connected!!")
+    process.exit(1)
+  }
 }
-//export database connection function
-module.exports = connectToDB;
+module.exports = connectDB
